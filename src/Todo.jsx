@@ -1,20 +1,36 @@
 import React from "react";
-import { ACTIONS } from "./App.js";
+import { ACTIONS } from "./Todos";
+import "./Todo.css";
 
-export default function Todo({ todo, dispatch }) {
+function Todo({ todo, dispatch }) {
   return (
-    <div>
-      <span style={{ color: todo.complete ? "#AAA" : "#000" }}>
-        {todo.name}
-      </span>
-      <button
-        onClick={() =>
-          dispatch({ type: ACTIONS.TOGGLE_TODO, payload: { id: todo.id } })
-        }
+    <div className="todo">
+      <div
+        style={{ color: todo.complete ? " rgb(7, 245, 7)" : "#fff" }}
+        className="todo__title"
       >
-        Toggle
-      </button>
-      <button>Delete</button>
+        {todo.name}
+      </div>
+      <div className="todo__buttons">
+        <button
+          className="todo__toggle"
+          onClick={() => {
+            dispatch({ type: ACTIONS.TOGGLE_TODO, payload: { id: todo.id } });
+          }}
+        >
+          Toggle
+        </button>
+        <button
+          className="todo__delete"
+          onClick={() => {
+            dispatch({ type: ACTIONS.DELETE_TODO, payload: { id: todo.id } });
+          }}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
+
+export default Todo;
